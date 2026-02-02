@@ -1,0 +1,2 @@
+# Hourly backfill safety run
+0 * * * * /opt/orchestration/backfill_job.sh $(date -d "1 hour ago" +\%F) $(date +\%F)
