@@ -188,12 +188,76 @@ Measured via:
 spark-kafka-render-telemetry/
 ├── kafka/
 │   ├── producer.py
-│   └── topic_setup.sh
+│   ├── topic_setup.sh
+│   ├── schemas/
+│   │   ├── render_event.avsc
+│   │   └── aggregation_event.avsc
+│   └── consumer_smoke_test.py
+│
 ├── spark/
 │   ├── streaming_baseline.py
 │   ├── streaming_optimized.py
 │   ├── batch_dimensions.py
+│   ├── aggregations/
+│   │   ├── windowed_metrics.py
+│   │   ├── stateful_rollups.py
+│   │   └── watermarking.py
+│   ├── sinks/
+│   │   ├── delta_sink.py
+│   │   └── parquet_sink.py
+│   └── checkpoints/
+│       └── README.md
+│
+├── storage/
+│   ├── delta/
+│   │   ├── render_metrics/
+│   │   └── aggregated_metrics/
+│   └── parquet/
+│       └── raw_events/
+│
+├── orchestration/
+│   ├── spark_submit.sh
+│   ├── backfill_job.sh
+│   └── cron_example.txt
+│
 ├── metrics/
-├── README.md
+│   ├── spark_metrics.json
+│   ├── kafka_lag_exporter.yml
+│   └── prometheus_rules.yml
+│
+├── config/
+│   ├── spark.conf
+│   ├── kafka.conf
+│   └── env.example
+│
+├── tests/
+│   ├── kafka/
+│   │   └── test_producer.py
+│   ├── spark/
+│   │   └── test_aggregations.py
+│   └── integration/
+│       └── test_end_to_end.py
+│
+├── docker/
+│   ├── docker-compose.yml
+│   ├── spark.Dockerfile
+│   └── kafka.Dockerfile
+│
+├── scripts/
+│   ├── generate_sample_events.py
+│   ├── validate_delta_tables.py
+│   └── replay_kafka_topic.sh
+│
+├── docs/
+│   ├── architecture.md
+│   ├── data_flow.md
+│   └── optimization_notes.md
+│
+├── .gitignore
+├── Makefile
+├── pyproject.toml
+├── requirements.txt
+└── README.md
+
 ```
 
