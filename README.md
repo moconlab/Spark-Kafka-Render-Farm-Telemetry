@@ -16,20 +16,6 @@ Diagnose Spark bottlenecks
 
 Apply targeted optimizations using Spark internals knowledge
 
-## Architecture
-
-```
-Render Nodes
-   ↓ (events)
-Kafka Topics
-   ↓
-Spark Structured Streaming
-   ↓
-Optimized Aggregations
-   ↓
-Parquet / Delta Tables
-```
-
 ## Problem Statement
 
 Render farms emit high-volume events:
