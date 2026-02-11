@@ -1,0 +1,54 @@
+groups:
+
+- name: spark_streaming_rules
+  interval: 30s
+  rules:
+
+  - alert: SparkHighBatchDuration
+    expr: renderfarm_spark_streaming_lastCompletedBatch_processingDelay > 60000
+    for: 2m
+    labels:
+      severity: warning
+    annotations:
+      summary: "Spark micro-batch duration high"
+      description: "Batch processing delay exceeded 60 seconds."
+
+  - alert: SparkHighStateStoreSize
+    expr: renderfarm_spark_streaming_stateOperators_memoryUsedBytes > 2000000000
+    for: 5m
+    labels:
+      severity: critical
+    annotations:
+      summary: "Spark state store too large"
+      description: "State store memory usage exceeds 2GB."
+
+  - alert: SparkShuffleSpillDetected
+    expr: renderfarm_spark_executor_shuffle_spill_memoryBytes > 1000000000
+    for: 3m
+    labels:
+      severity: warning
+    annotations:
+      summary: "High shuffle spill"
+      description: "Spark is spilling over 1GB to disk."
+
+- name: kafka_rules
+  interval: 30s
+  rules:
+
+  - alert: KafkaConsumerLagHigh
+    expr: kafka_consumergroup_lag > 50000
+    for: 5m
+    labels:
+      severity: critical
+    annotations:
+      summary: "Kafka consumer lag high"
+      description: "Consumer lag exceeds 50k messages."
+
+  - alert: KafkaNoConsumption
+    expr: increase(kafka_consumergroup_current_offset[5m]) == 0
+    for: 5m
+    labels:
+      severity: warning
+    annotations:
+      summary: "Kafka consumer stalled"
+      description: "No offset movement detected in last 5 minutes."

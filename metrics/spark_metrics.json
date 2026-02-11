@@ -1,0 +1,34 @@
+{
+  "metrics": {
+    "namespace": "renderfarm_spark",
+    "sink": {
+      "prometheus": {
+        "class": "org.apache.spark.metrics.sink.PrometheusServlet",
+        "path": "/metrics/prometheus",
+        "period": 10,
+        "unit": "seconds"
+      }
+    }
+  },
+
+  "sources": {
+    "jvm": {},
+    "executor": {},
+    "driver": {},
+    "application": {},
+    "streaming": {}
+  },
+
+  "properties": {
+    "*.sink.prometheus.class": "org.apache.spark.metrics.sink.PrometheusServlet",
+    "*.sink.prometheus.path": "/metrics/prometheus",
+    "*.sink.prometheus.period": "10",
+    "*.sink.prometheus.unit": "seconds",
+
+    "master.source.jvm.class": "org.apache.spark.metrics.source.JvmSource",
+    "worker.source.jvm.class": "org.apache.spark.metrics.source.JvmSource",
+
+    "executor.source.jvm.class": "org.apache.spark.metrics.source.JvmSource",
+    "driver.source.jvm.class": "org.apache.spark.metrics.source.JvmSource"
+  }
+}
