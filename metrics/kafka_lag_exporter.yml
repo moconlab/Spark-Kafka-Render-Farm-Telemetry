@@ -1,0 +1,21 @@
+cluster:
+  name: render-farm-cluster
+  bootstrapBrokers: "kafka:9092"
+
+pollInterval: 30s
+
+groups:
+  - name: render-stream-consumers
+    regex: ".*render.*"
+
+topics:
+  - name: render-events
+
+metricWhitelist:
+  - kafka_consumergroup_lag
+  - kafka_consumergroup_current_offset
+  - kafka_topic_partition_current_offset
+
+labels:
+  environment: dev
+  project: spark-kafka-render-telemetry

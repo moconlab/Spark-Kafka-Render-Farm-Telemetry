@@ -17,6 +17,15 @@ services:
     ports:
       - "9092:9092"
 
+  kafka-lag-exporter:
+  image: seglo/kafka-lag-exporter
+  volumes:
+    - ./metrics/kafka_lag_exporter.yml:/opt/docker/conf/application.yml
+  ports:
+    - "8000:8000"
+  depends_on:
+    - kafka
+
   spark-master:
     image: bitnami/spark:3.5
     environment:
